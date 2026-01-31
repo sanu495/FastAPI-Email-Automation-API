@@ -28,12 +28,13 @@ conf = ConnectionConfig(
 )
 
 
-async def send_email(subject:str, email_to: list , data:Dict | List):
+async def send_email(subject:str, email_to: list , data:Dict | List, file: str):
     message = MessageSchema(
         subject=subject,
         recipients=email_to,
         template_body=data,
-        subtype=MessageType.html
+        subtype=MessageType.html,
+        attachments=[file] if file else []
     )
 
     fmail = FastMail(conf)
